@@ -79,8 +79,15 @@ export class NoteListService {
   }
 
 
-  async addNote(item: Note){
-    await addDoc(this.getNotesRef(), item).catch(
+  async addNote(item: Note, colId: "notes" | "trash" = "notes") {
+    let collectionRef;
+    if (colId === "trash") {
+      collectionRef = this.getTrashRef(); // Stellen Sie sicher, dass diese Methode die richtige Referenz zurückgibt
+    } else {
+      collectionRef = this.getNotesRef();
+    }
+  
+    await addDoc(collectionRef, item).catch(
       (err) => { console.error(err) }
     ).then(
       (docRef) => { console.log("Document written with id: ", docRef?.id) }
