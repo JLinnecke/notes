@@ -25,13 +25,13 @@ export class NoteListComponent {
   getList(): Note[] {
     return [...this.noteService.normalNotes, ...this.noteService.trashNotes];
   }
-
   
 
   changeFavFilter(filter:"all" | "fav"){
     this.favFilter = filter;
   }
 
+  
   changeTrashStatus(){
     if(this.status == "trash"){
       this.status = "notes";
